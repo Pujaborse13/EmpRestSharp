@@ -14,32 +14,31 @@ class Program
 
     static void Main(string[] args)
     {
-        // Adding new Employee
+        //Update Employee record by ID
 
         var client = new RestClient("http://localhost:3000");
+        Console.WriteLine("Update Record");
 
-        Console.WriteLine("Adding a new Employee");
+        var request = new RestRequest($"Employees/{1}", Method.Put);
 
-        var request = new RestRequest("Employees", Method.Post);
         var jsonObj = new
         {
-            Id = "10",
-            Name = "pratibha",
-            Salary = "66900"
+            
+            Name = "Puja",
+            Salary = "90000",
         };
-
 
         request.AddJsonBody(jsonObj);
 
-        var response = client.Execute(request);
+        var response =  client.Execute(request);
 
-        if (response.StatusCode == HttpStatusCode.Created)
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            Console.WriteLine($"Added Employee: {jsonObj.Name}, Salary: {jsonObj.Salary}");
+            Console.WriteLine($"Updated Employee ID: 1,New Name :{jsonObj.Name}, New Salary: {jsonObj.Salary} ");
         }
         else
         {
-            Console.WriteLine($"Failed to add employee. Status: {response.StatusCode}");
+            Console.WriteLine($"Failed to update employee salary. Status: {response.StatusCode}");
         }
 
 
