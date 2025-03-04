@@ -14,33 +14,23 @@ class Program
 
     static void Main(string[] args)
     {
-        //Update Employee record by ID
+
+        //Delete Record by Id
 
         var client = new RestClient("http://localhost:3000");
-        Console.WriteLine("Update Record");
 
-        var request = new RestRequest($"Employees/{1}", Method.Put);
+        Console.WriteLine("Deleting an employee...");
+        var request = new RestRequest("Employees/10", Method.Delete);
+        var response = client.Execute(request);
 
-        var jsonObj = new
+        if (response.StatusCode == HttpStatusCode.OK)
         {
-            
-            Name = "Puja",
-            Salary = "90000",
-        };
-
-        request.AddJsonBody(jsonObj);
-
-        var response =  client.Execute(request);
-
-        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-        {
-            Console.WriteLine($"Updated Employee ID: 1,New Name :{jsonObj.Name}, New Salary: {jsonObj.Salary} ");
+            Console.WriteLine($"Successfully deleted employee with ID: 10");
         }
         else
         {
-            Console.WriteLine($"Failed to update employee salary. Status: {response.StatusCode}");
+            Console.WriteLine($"Failed to delete employee. Status: {response.StatusCode}");
         }
-
 
 
     }
