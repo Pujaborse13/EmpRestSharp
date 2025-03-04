@@ -15,7 +15,7 @@ class Program
     static void Main(string[] args)
     {
         var client = new RestClient("http://localhost:3000");
-
+        
         // Create a GET request
         var request = new RestRequest("Employees", Method.Get);
 
@@ -47,12 +47,15 @@ class Program
         {
             Console.WriteLine($"Error: {response.StatusCode}, Message: {response.Content}");
         }
+        
 
-        Console.WriteLine("Press any key to exit...");
-        Console.ReadKey();
+
+
+
+
+
+
 
     }
 }
 
-
-   
